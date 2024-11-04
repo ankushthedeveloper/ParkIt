@@ -3,22 +3,44 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "libs/*"
+    ],
+    "nohoist": [
+      "**/@nestjs",
+      "**/@nestjs/**"
+    ]
+  },
   "scripts": {
     "format": "prettier  \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
-    "format:check": "pnpm format --check",
-    "format:write": "pnpm format --write",
-    "tsc": "pnpm --parallel -r run tsc",
-    "lint": "pnpm --parallel -r run lint",
-    "build":"pnpm --parallel -r run build",
-    "validate": "pnpm format:write && pnpm tsc && pnpm lint && pnpm  build",
-    "prepare": "husky install"
+    "format:check": "yarn format --check",
+    "format:write": "yarn format --write",
+    "tsc": "yarn nx run-many -t tsc",
+    "lint": "yarn nx run-many -t lint",
+    "build": "yarn nx run-many -t build",
+    "validate": "yarn format:write && yarn tsc && yarn lint && yarn build",
+    "prepare": "husky install",
+    "cloc": "npx cloc --exclude-dir=node_modules,dist,build,yarn.lock,package.json,generated.tsx,.next,.nx ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@nx/eslint": "20.0.8",
+    "@nx/next": "20.0.8",
+    "@types/cookie": "^1.0.0",
+    "eslint": "~9.14.0",
+    "husky": "^9.1.6",
+    "nx": "20.0.8",
     "prettier": "^3.0.0",
-    "typescript": "^5.6.3",
-    "husky": "^8.0.0"
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "cookie": "^1.0.1",
+    "next": "15.0.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   }
 }

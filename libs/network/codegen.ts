@@ -1,0 +1,47 @@
+import type { CodegenConfig } from '@graphql-codegen/cli'
+const documentsPattern = '**/*.graphql'
+
+const plugins = [
+  'typescript',
+  'typescript-operations',
+  'named-operations-object',
+  'typed-document-node',
+]
+
+const config: CodegenConfig = {
+  overwrite: true,
+  schema: '../../apps/api/src/schema.gql',
+  watch: true,
+  generates: {
+    './src/gql/generated.tsx': {
+      documents: `./src/${documentsPattern}`,
+      plugins,
+    },
+  },
+}
+
+export default config
+
+// import type { CodegenConfig } from '@graphql-codegen/cli';
+
+// const documentsPattern = '**/*.graphql';
+
+// const plugins = [
+//     'typescript',
+//     'typescript-operations',
+//     'named-operations-object',
+//     'typed-document-node',
+// ];
+
+// const config: CodegenConfig = {
+//     overwrite: true,
+//     schema: '../../apps/api/src/schema.gql',
+//     documents: `./src/${documentsPattern}`, // Move this here
+//     generates: {
+//         './src/gql/generated.ts': {
+//             plugins,
+//         },
+//     },
+// };
+
+// export default config;
